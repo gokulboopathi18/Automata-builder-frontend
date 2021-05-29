@@ -16,6 +16,10 @@
                     <button id="runButton" size="sm" @click="runMachine">
                         Run Machine
                     </button>
+
+                    <button id="clearButton" size="sm" @click="clearCanvas">
+                        Clear Canvas
+                    </button>
                 </b-button-group>
             </b-navbar-brand>
 
@@ -578,6 +582,26 @@ export default {
 
             this.testString = ""
             this.$bvModal.show('modal-string')
+        },
+
+        // clear canvas and reset variables
+        clearCanvas(){
+            this.machineName = ""
+            this.currentState = 0
+            this.alphabets = ""
+            this.accepted = false
+            this.testString = ""
+            this.startStateOpacity = 1
+            this.dragNDropping = false
+            this.startDisabled = false
+            this.machineHash = null
+            this.stateMachine = []
+            this.lastDownState = null
+            this.currentState = null
+            this.currentTransitionObject = null
+
+            // Clear the entire canvas
+            this.canvasArea.clearRect(0,0,this.canvasWidth, this.canvasHeight)
         }
     },
 
@@ -639,14 +663,14 @@ export default {
         color: white;
         font-size: 15px;
         padding: 10px 15px;
+        border: none!important;
+        outline: none!important;
     }
 
     #storeButton{
         background-color: $secondary-accent-dark;
         border-radius: 3px;
         transition: all 0.4s;
-        border: none!important;
-        outline: none!important;
     }
 
     #storeButton:hover{
@@ -659,12 +683,22 @@ export default {
         border-radius: 3px;
         margin-left: 10px;
         transition: all 0.4s;
-        border: none!important;
-        outline: none!important;
     }
 
     #runButton:hover{
         background-color: $primary-accent-dark;
+        transition: all 0.4s;
+    }
+
+    #clearButton{
+        background-color: $dark-color-alt;
+        border-radius: 3px;
+        margin-left: 10px;
+        transition: all 0.4s;
+    }
+
+    #clearButton:hover{
+        background-color: $dark-color;
         transition: all 0.4s;
     }
 }
