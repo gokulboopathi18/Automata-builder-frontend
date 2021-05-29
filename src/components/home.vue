@@ -14,16 +14,26 @@ import Particles from 'particlesjs'
 
 export default{
     name: "Home",
+    data: ()=>{
+        return{
+            particles: null
+        }
+    },
     mounted(){
-        Particles.init({
+        this.particles = Particles.init({
             selector: '.background',
             maxParticles: 120,
-            speed: 0.1,
+            speed: 0.14,
             sizeVariations: 2,
             minDistance: 170,
             color: '#A3B8B3',
-            connectParticles: true
+            connectParticles: true,
+            fps:30
         })
+    },
+    destroyed(){
+        this.particles.destroy()
+        console.log(this.particles)
     }
 }
 </script>
