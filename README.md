@@ -1,4 +1,5 @@
 # christopher
+#### A Vue.js drag-and-drop tool to build Finite Automata. Designed to work with the [REST API + mysql](https://github.com/prithivi-maruthachalam/Automata-builder-backend.git) server for this project
 
 ## Project setup
 ```
