@@ -52,7 +52,7 @@
             hide-header-close
             @ok="transitionStringEntered"
         >
-            <b-form-input v-model="alphabets" placeholder="Alphabets go here" autocomplete="off" autofocus></b-form-input>
+            <b-form-input v-model="alphabets" v-on:keyup.enter="transitionStringEntered" placeholder="Alphabets go here" autocomplete="off" autofocus></b-form-input>
         </b-modal>
 
         <!-- Modal for machine name prompt -->
@@ -64,7 +64,7 @@
             hide-header-close
             @ok="modalNameEntered"
         >
-            <b-form-input v-model="machineName" placeholder="What do you want to call this machine?" autocomplete="off" autofocus></b-form-input>
+            <b-form-input v-model="machineName" v-on:keyup.enter="modalNameEntered" placeholder="What do you want to call this machine?" autocomplete="off" autofocus></b-form-input>
         </b-modal>
 
         <!-- Modal for test string prompt -->
@@ -76,7 +76,7 @@
             hide-header-close
             @ok="modalStringEntered"
         >
-            <b-form-input v-model="testString" placeholder="Got a string to test?" autocomplete="off" autofocus></b-form-input>
+            <b-form-input v-model="testString" v-on:keyup.enter="modalStringEntered" placeholder="Got a string to test?" autocomplete="off" autofocus></b-form-input>
         </b-modal>
 
         <!-- Mutipurpose notifications -->
@@ -397,6 +397,8 @@ export default {
 
         // Submit for tansition prompt
         transitionStringEntered(){
+            this.$bvModal.hide('modal-trans')
+
             if(this.alphabets == null || this,this.alphabets == ""){
                 return false
             }
@@ -434,6 +436,8 @@ export default {
 
         // POST a test string to the server after a machine has been stored and a hash has been generated
         async modalStringEntered(){
+            this.$bvModal.hide('modal-string')
+
             if(this.testString == "" ){
                 this.$notify({
                     group: 'notifications',
@@ -482,6 +486,8 @@ export default {
 
         // POST the machine along with a machine name to the server
         async modalNameEntered(){
+            this.$bvModal.hide('modal-name')
+
             if(this.machineName == "" || this.machineName == null){
                 this.alertText = "'Nothing' is not really a name"
                 this.$notify({
@@ -639,6 +645,8 @@ export default {
         background-color: $secondary-accent-dark;
         border-radius: 3px;
         transition: all 0.4s;
+        border: none!important;
+        outline: none!important;
     }
 
     #storeButton:hover{
@@ -651,6 +659,8 @@ export default {
         border-radius: 3px;
         margin-left: 10px;
         transition: all 0.4s;
+        border: none!important;
+        outline: none!important;
     }
 
     #runButton:hover{
